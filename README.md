@@ -334,3 +334,97 @@ c.printDetails()
 
 ```
 
+### Composition
+Composition is the practice of accessing other class objects in your class. In such a scenario, the class which creates the object of the other class is known as the owner and is responsible for the lifetime of that object.
+
+Composition relationships are Part-of relationships where the part must constitute a segment of the whole object. We can achieve composition by adding smaller parts of other classes to make a complex unit.
+
+Owner class creates the objects of other classes.
+
+```
+class Engine:
+    def __init__(self, capacity=0):
+        self.capacity = capacity
+
+    def printDetails(self):
+        print("Engine Details:", self.capacity)
+
+
+class Tires:
+    def __init__(self, tires=0):
+        self.tires = tires
+
+    def printDetails(self):
+        print("Number of tires:", self.tires)
+
+
+class Doors:
+    def __init__(self, doors=0):
+        self.doors = doors
+
+    def printDetails(self):
+        print("Number of doors:", self.doors)
+
+
+class Car:
+    def __init__(self, eng, tr, dr, color):
+        self.eObj = Engine(eng)
+        self.tObj = Tires(tr)
+        self.dObj = Doors(dr)
+        self.color = color
+
+    def printDetails(self):
+        self.eObj.printDetails()
+        self.tObj.printDetails()
+        self.dObj.printDetails()
+        print("Car color:", self.color)
+
+
+car = Car(1600, 4, 2, "Grey")
+car.printDetails()
+
+```
+
+### Implementing a Sports Team Example
+```
+# Player class
+class Player:
+    def __init__(self, ID, name, teamName):
+        self.ID = ID
+        self.name = name
+        self.teamName = teamName
+
+
+# Team class contains a list of Player
+# Objects
+class Team:
+    def __init__(self, name):
+        self.name = name
+        self.players = []
+
+    def addPlayer(self, player):
+        self.players.append(player)
+
+    def getNumberOfPlayers(self):
+        return len(self.players)
+
+
+# School class contains a list of Team
+# objects.
+class School:
+    def __init__(self, name):
+        self.name = name
+        self.teams = []
+
+    def addTeam(self, team):
+        self.teams.append(team)
+
+    def getTotalPlayersInSchool(self):
+        tot = 0
+        for team in self.teams:
+            tot += team.getNumberOfPlayers()
+        return tot
+
+
+# Complete the implementation
+```
