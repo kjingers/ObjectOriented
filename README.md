@@ -108,3 +108,70 @@ class Employee:
 Steve = Employee(3789, 2500)
 print(Steve._Employee__salary)  # accessing a private property
 ```
+## Inheritence
+
+### Syntax
+Inheriting Vehicle and calling parent constructor
+```
+class Vehicle:
+    def __init__(self, make, color, model):
+        self.make = make
+        self.color = color
+        self.model = model
+
+    def printDetails(self):
+        print("Manufacturer:", self.make)
+        print("Color:", self.color)
+        print("Model:", self.model)
+
+
+class Car(Vehicle):
+    def __init__(self, make, color, model, doors):
+        # calling the constructor from parent class
+        Vehicle.__init__(self, make, color, model)
+        self.doors = doors
+
+    def printCarDetails(self):
+        self.printDetails()
+        print("Doors:", self.doors)
+
+
+obj1 = Car("Suzuki", "Grey", "2015", 4)
+obj1.printCarDetails()
+```
+
+### super() function
+The uses:
+* Accessing parent class properties
+* Calling the parent class methods
+* Using with initializers
+
+### Types of Inheritence
+* Single
+* Multi-level
+* Hierarchical
+* Multiple
+* Hybrid
+
+### Multiple Inheritence
+```
+class CombustionEngine():  
+    def setTankCapacity(self, tankCapacity):
+        self.tankCapacity = tankCapacity
+
+
+class ElectricEngine():  
+    def setChargeCapacity(self, chargeCapacity):
+        self.chargeCapacity = chargeCapacity
+
+# Child class inherited from CombustionEngine and ElectricEngine
+class HybridEngine(CombustionEngine, ElectricEngine):
+    def printDetails(self):
+        print("Tank Capacity:", self.tankCapacity)
+        print("Charge Capacity:", self.chargeCapacity)
+
+car = HybridEngine()
+car.setChargeCapacity("250 W")
+car.setTankCapacity("20 Litres")
+car.printDetails()
+```
