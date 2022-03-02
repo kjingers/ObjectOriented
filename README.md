@@ -259,9 +259,12 @@ cat = Cat()
 
 sound.Sound(dog)
 sound.Sound(cat)
+```
 
 ### Abstract Base Classes
 So the user does not create objects of a parent class, where the parent class cannot stand on its own. One or more child classes are necessary to implement the functions.
+
+Methods with @abstractmethod decorator MUST be implement in child class.
 
 Import abc module to implement:
 ```
@@ -287,3 +290,47 @@ shape = Shape()
 # this code will not compile since Shape has abstract methods without
 # method definitions in it
 ```
+
+## Object Relationship
+* Inheritence: "IS A" Relationship
+* Part-of: One class is a component of another
+* Has-a: One class has a reference to another, but both classes can exit on their own.
+
+### Aggregation
+Aggregation follows the Has-A model. This creates a parent-child relationship between two classes, with one class owning the object of another.
+
+One class has a reference to the other.
+
+![image](https://user-images.githubusercontent.com/13190696/156423486-41375015-5469-45ae-9fce-d9ddfd35ff85.png)
+```
+class Country:
+    def __init__(self, name=None, population=0):
+        self.name = name
+        self.population = population
+
+    def printDetails(self):
+        print("Country Name:", self.name)
+        print("Country Population", self.population)
+
+
+class Person:
+    def __init__(self, name, country):
+        self.name = name
+        self.country = country
+
+    def printDetails(self):
+        print("Person Name:", self.name)
+        self.country.printDetails()
+
+
+c = Country("Wales", 1500)
+p = Person("Joe", c)
+p.printDetails()
+
+# deletes the object p
+del p
+print("")
+c.printDetails()
+
+```
+
