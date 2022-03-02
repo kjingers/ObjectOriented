@@ -204,3 +204,86 @@ class HybridEngine(CombustionEngine, ElectricEngine):
 ```
 
 ## Polymorphism
+For example, have a Shape class with getArea() method. And then other shapes extend Shape and implement getArea().
+```
+class Shape:
+    def __init__(self):  # initializing sides of all shapes to 0
+        self.sides = 0
+
+    def getArea(self):
+        pass
+
+
+class Rectangle(Shape):  # derived from Shape class
+    # initializer
+    def __init__(self, width=0, height=0):
+        self.width = width
+        self.height = height
+        self.sides = 4
+
+    # method to calculate Area
+    def getArea(self):
+        return (self.width * self.height)
+
+
+class Circle(Shape):  # derived from Shape class
+    # initializer
+    def __init__(self, radius=0):
+        self.radius = radius
+
+    # method to calculate Area
+    def getArea(self):
+        return (self.radius * self.radius * 3.142)
+```
+
+### Duck Typing
+```
+class Dog:
+    def Speak(self):
+        print("Woof woof")
+
+
+class Cat:
+    def Speak(self):
+        print("Meow meow")
+
+
+class AnimalSound:
+    def Sound(self, animal):
+        animal.Speak()
+
+
+sound = AnimalSound()
+dog = Dog()
+cat = Cat()
+
+sound.Sound(dog)
+sound.Sound(cat)
+
+### Abstract Base Classes
+So the user does not create objects of a parent class, where the parent class cannot stand on its own. One or more child classes are necessary to implement the functions.
+
+Import abc module to implement:
+```
+from abc import ABC, abstractmethod
+
+
+class Shape(ABC):  # Shape is a child class of ABC
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+
+class Square(Shape):
+    def __init__(self, length):
+        self.length = length
+
+
+shape = Shape()
+# this code will not compile since Shape has abstract methods without
+# method definitions in it
+```
